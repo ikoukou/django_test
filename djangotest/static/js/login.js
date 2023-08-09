@@ -10,7 +10,8 @@ var vm = new Vue({
 		error_password_message: '请输入8-12位的密码',
         username: '',
         password: '',
-        remembered: true
+        remembered: true,
+        flag: true
     },
     methods: {
         // 检查账号
@@ -26,9 +27,9 @@ var vm = new Vue({
         check_pwd: function(){
         	var re = /^[0-9A-Za-z]{8,20}$/;
 			if (re.test(this.password)) {
-                this.error_pwd = false;
+                this.error_password = false;
             } else {
-                this.error_pwd = true;
+                this.error_password = true;
             }
         },
         // 表单提交
@@ -38,6 +39,8 @@ var vm = new Vue({
 
             if (this.error_username == true || this.error_pwd == true) {
                 // 不满足登录条件：禁用表单
+                console.log(this.error_username)
+                console.log(this.error_pwd)
 				window.event.returnValue = false
             }
         },
@@ -55,5 +58,12 @@ var vm = new Vue({
                     console.log(error.response);
                 })
         }
-    }
+    },
+    computed: {
+        isSubmitDisabled: function() {
+            console.log("this changed");
+            flag = this.error_username || this.error_password;
+            return flag;
+        },
+    },
 });

@@ -35,6 +35,7 @@ var vm = new Vue({
         this.generate_image_code();
     },
     methods: {
+        // 生成一个随机uuid
         generateUUID: function () {
             var d = new Date().getTime();
             if (window.performance && typeof window.performance.now === "function") {
